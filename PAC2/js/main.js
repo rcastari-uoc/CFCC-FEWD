@@ -18,10 +18,18 @@ function changeThemeTo(themeName){
             if(becl.contains("theme-dark")){
                 becl.remove("theme-dark");    
             }
+            // Eliminem l'escolta als canvis de tema de sistema, si s'escau
+            if(window.matchMedia){
+                window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', pokedexOnSystemThemeChanged, false);
+            }
             break;
         case "dark":
             if(!becl.contains("theme-dark")){
                 becl.add("theme-dark")
+            }
+            // Eliminem l'escolta als canvis de tema de sistema, si s'escau
+            if(window.matchMedia){
+                window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', pokedexOnSystemThemeChanged, false);
             }
             break;
         case "system":
@@ -35,10 +43,7 @@ function changeThemeTo(themeName){
                 }
                 
                 //afegim un listener per si l'usuari canvia les preferències del sistema
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-                    const newColorScheme = event.matches ? "dark" : "light";
-                    changeThemeTo(newColorScheme);
-                });
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', pokedexOnSystemThemeChanged, false);
 
             }else{
                 throw "Error - your system does not support this option!";
@@ -57,8 +62,6 @@ function pokedexOnThemeSelected(event){
 
     let target = event.target;
 
-    
-
     try {
         changeThemeTo(target.value);
         localStorage.setItem("pokedex-theme-value", target.value);
@@ -66,6 +69,11 @@ function pokedexOnThemeSelected(event){
         alert(error);
     }
 
+}
+
+function pokedexOnSystemThemeChanged(event){
+    const newColorScheme = event.matches ? "dark" : "light";
+    changeThemeTo(newColorScheme);
 }
 
 /**

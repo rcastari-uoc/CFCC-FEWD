@@ -1,14 +1,75 @@
-.root {
+:root {
   --background-color: #EEE;
   --color: #111;
+  --card-background-color: #FCC;
+  --card-color: #700;
+  --card-border-color: #A00;
 }
 
 .theme-dark {
   --background-color: #111;
-  --color: #EEE; 
+  --color: #EEE;
+  --card-background-color: #700;
+  --card-color: #FCC;
+  --card-border-color: #A00;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--color);
 }
+
+#pokedex-deck {
+  display: grid;
+  grid-template-columns: repeat(5, 12em);
+  grid-template-rows: 16.5em 16.5em;
+  grid-gap: 2em 4em;  
+}
+
+#pokedex-deck.hidden, #pokedex-pokemon-details.hidden {
+  display: none;
+}
+
+div.poke-card {
+  display: grid;
+  grid-template-columns: 5.5em 5.5em;
+  grid-template-rows: 2em 9.5em 0.5em 2em 1em;
+  place-items: center;
+
+  background-color: var(--card-background-color);
+  color: var(--card-color);
+  border: 0.5em solid var(--card-border-color);
+  border-radius: 1em;
+}
+
+.poke-card .poke-name {
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  font-weight: bold;
+  font-size: large;
+}
+
+.poke-card .poke-front-image {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+}
+
+.poke-card .poke-stats-label {
+  font-size: small;
+  font-weight: bold;
+}
+
+.poke-card .poke-stats-value {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.poke-card .poke-more-details {
+  grid-row: 5;
+  grid-column: 1 / span 2;
+}
+
+#pokedex-pokemon-details {
+  display: grid;
+}
+
