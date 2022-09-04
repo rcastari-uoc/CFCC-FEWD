@@ -37,13 +37,40 @@
     <div id="content">
 
         <div id="pokedex-deck"></div>
+
         <div id="pokedex-pokemon-details" class="hidden">
-            <div id="podedex-pokemon-detailed-info">
+            <div id="pokedex-pokemon-detailed-info">
+
 
             </div>
             <a id="pokedex-back-from-details" href="javascript:history.back()">Tornar enrere</a>
         </div>
         
+    </div>
+    <div id="pokedex-html-templates" class="hidden">
+
+        <div class="poke-card">
+            <div class="poke-name"></div>
+            <img class="poke-front-image" src="" alt=""/>
+            <div class="poke-attack-label poke-stats-label">ATTACK</div>
+            <div class="poke-attack poke-stats-value"></div>
+            <div class="poke-defense-label poke-stats-label">DEFENSE</div>
+            <div class="poke-defense poke-stats-value"></div>
+            <a class="poke-more-details" href="" target="_self">More info</a>
+        </div>
+        
+        <div class="poke-card-details">
+            <div class="poke-name"></div>
+            <img class="poke-front-image" src="" alt=""/>
+            <img class="poke-back-image" src="" alt=""/>
+            <div class="poke-attack-label poke-stats-label">ATTACK</div>
+            <div class="poke-attack poke-stats-value"></div>
+            <div class="poke-defense-label poke-stats-label">DEFENSE</div>
+            <div class="poke-defense poke-stats-value"></div>
+            <div class="poke-types-label">Types:</div>
+            <div class="poke-types-values"><ul></ul></div>
+        </div>
+
     </div>
 </body>
 </html>

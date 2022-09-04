@@ -14,52 +14,18 @@ class PokeCard{
 
     toHTMLBasicView(){
 
-        let cardElement = document.createElement("div");
-        cardElement.classList.add("poke-card");
+        let cardTemplate = document.querySelector("#pokedex-html-templates>div.poke-card");
+
+        let cardElement = cardTemplate.cloneNode(true);
+
         cardElement.dataset.id = this.id;
-        
-        let nameElement = document.createElement("div");
-        nameElement.classList.add("poke-name");
-        nameElement.appendChild(document.createTextNode(this.name));
 
-        let frontImageElement = document.createElement("img");
-        frontImageElement.classList.add("poke-front-image");
-        frontImageElement.src = this.frontImage;
-        frontImageElement.alt = this.frontImage;
-
-        let attackLabelElement = document.createElement("div");
-        attackLabelElement.classList.add("poke-attack-label");
-        attackLabelElement.classList.add("poke-stats-label");
-        attackLabelElement.appendChild(document.createTextNode("ATTACK"));
-
-        let attackElement = document.createElement("div");
-        attackElement.classList.add("poke-attack");
-        attackElement.classList.add("poke-stats-value");
-        attackElement.appendChild(document.createTextNode(this.attack));
-
-        let defenseLabelElement = document.createElement("div");
-        defenseLabelElement.classList.add("poke-defense-label");
-        defenseLabelElement.classList.add("poke-stats-label");
-        defenseLabelElement.appendChild(document.createTextNode("DEFENSE"));
-
-        let defenseElement = document.createElement("div");
-        defenseElement.classList.add("poke-defense");
-        attackElement.classList.add("poke-stats-value");
-        defenseElement.appendChild(document.createTextNode(this.defense));
-
-        let moreDetailsElement = document.createElement("a");
-        moreDetailsElement.classList.add("poke-more-details");
-        moreDetailsElement.href = "index.html?pokeID="+this.id;
-        moreDetailsElement.target = "_self";
-        moreDetailsElement.appendChild(document.createTextNode("més info"));
-
-        cardElement.appendChild(nameElement);
-        cardElement.appendChild(frontImageElement);
-        cardElement.appendChild(attackLabelElement);
-        cardElement.appendChild(attackElement);
-        cardElement.appendChild(defenseLabelElement);
-        cardElement.appendChild(defenseElement);
-        cardElement.appendChild(moreDetailsElement);
+        cardElement.querySelector(".poke-name").appendChild(document.createTextNode(this.name));
+        cardElement.querySelector(".poke-front-image").src = this.frontImage;
+        cardElement.querySelector(".poke-front-image").alt = this.frontImage;
+        cardElement.querySelector(".poke-attack").appendChild(document.createTextNode(this.attack));
+        cardElement.querySelector(".poke-defense").appendChild(document.createTextNode(this.defense));
+        cardElement.querySelector(".poke-more-details").href = "index.html?pokeID="+this.id;
 
         return cardElement;
 
@@ -67,25 +33,27 @@ class PokeCard{
 
     toHTMLAdvancedView(){
 
-        let cardElement = this.toHTMLBasicView();
+        let cardTemplate = document.querySelector("#pokedex-html-templates>div.poke-card-details");
 
-        let backImageElement = document.createElement("img");
-        backImageElement.classList.add("poke-back-image");
-        backImageElement.src = this.backImage;
-        backImageElement.alt = this.backImage;
+        let cardElement = cardTemplate.cloneNode(true);
 
-        let typesElement = document.createElement("div");
-        typesElement.classList.add("poke-types-container");
-        let typesULElement = document.createElement("ul");
+        cardElement.dataset.id = this.id;
+
+        cardElement.querySelector(".poke-name").appendChild(document.createTextNode(this.name));
+        cardElement.querySelector(".poke-front-image").src = this.frontImage;
+        cardElement.querySelector(".poke-front-image").alt = this.frontImage;
+        cardElement.querySelector(".poke-back-image").src = this.backImage;
+        cardElement.querySelector(".poke-back-image").alt = this.backImage;
+        cardElement.querySelector(".poke-attack").appendChild(document.createTextNode(this.attack));
+        cardElement.querySelector(".poke-defense").appendChild(document.createTextNode(this.defense));
+        
+        let typesULElement = cardElement.querySelector(".poke-types-values > ul");
+
         this.types.forEach(pokeType => {
             let typeLIElement = document.createElement("li");
             typeLIElement.appendChild(document.createTextNode(pokeType.type.name));
             typesULElement.appendChild(typeLIElement);
         });
-        typesElement.appendChild(typesULElement);
-
-        cardElement.appendChild(backImageElement);
-        cardElement.appendChild(typesElement);
 
         return cardElement;
 
@@ -221,8 +189,9 @@ function loadTheRestOfTheIndexPage(){
         let pokeCard = pokeDeck.get(parseInt(pokeIDParam)).toHTMLAdvancedView();
         let deckDiv = document.getElementById("pokedex-deck");
         let detailsDiv = document.getElementById("pokedex-pokemon-details");
-        detailsDiv.innerHTML="";
-        detailsDiv.appendChild(pokeCard);
+        let detailedInfoDiv = document.getElementById("pokedex-pokemon-detailed-info");
+        detailedInfoDiv.innerHTML="";
+        detailedInfoDiv.appendChild(pokeCard);
         deckDiv.classList.add("hidden");
         detailsDiv.classList.remove("hidden");
     }else{
