@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex - Combat</title>
     <link rel="stylesheet" href="assets/css/main.css"></link>
+    <script src="js/themes.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/combat.js" defer></script>
 </head>
@@ -15,7 +16,7 @@
         <nav id="navBar">
             <ul id="pageSelector">
                 <li><a href="index.html">Inici</a></li>
-                <li><a href="combat.html">Combat</a></li>
+                <li class="selected"><a href="combat.html">Combat</a></li>
             </ul>
         </nav>
         <div id="themeSelector">
@@ -33,9 +34,39 @@
                 <label for="system">El mateix que el sistema</label>
             </div>
         </div>
-    </nav>
-    <div id="content">
-        
     </div>
+    <div id="content">
+        <div id="pokedex-deck-container">
+            <div id="pokedex-filter-container">
+                <label for="pokedex-filter">Filter: </label>
+                <input id="pokedex-filter" type="search" name="pokedex-filter"/>
+                <button id="pokedex-clear-filter">Clear</button>
+            </div>
+            <div id="pokedex-deck"></div>
+        </div>
+    </div>
+    <div id="pokedex-html-templates" class="hidden">
+
+        <div class="poke-card">
+            <div class="poke-name"></div>
+            <img class="poke-front-image" src="" alt=""/>
+            <div class="poke-attack-label poke-stats-label">ATTACK</div>
+            <div class="poke-attack poke-stats-value"></div>
+            <div class="poke-defense-label poke-stats-label">DEFENSE</div>
+            <div class="poke-defense poke-stats-value"></div>
+            <a class="poke-more-details" href="" target="_self">More info</a>
+        </div>
+        
+        <div class="poke-card-details">
+            <div class="poke-name"></div>
+            <img class="poke-front-image" src="" alt=""/>
+            <img class="poke-back-image" src="" alt=""/>
+            <div class="poke-attack-label poke-stats-label">ATTACK</div>
+            <div class="poke-attack poke-stats-value"></div>
+            <div class="poke-defense-label poke-stats-label">DEFENSE</div>
+            <div class="poke-defense poke-stats-value"></div>
+            <div class="poke-types-label">Types:</div>
+            <div class="poke-types-values"><ul></ul></div>
+        </div>
 </body>
 </html>

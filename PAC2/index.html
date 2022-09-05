@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex - Inici</title>
     <link rel="stylesheet" href="assets/css/main.css"></link>
+    <script src="js/themes.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/index.js" defer></script>
 </head>
@@ -14,7 +15,7 @@
     <div id="menuBar">
         <nav id="navBar">
             <ul id="pageSelector">
-                <li><a href="index.html">Inici</a></li>
+                <li class="selected"><a href="index.html">Inici</a></li>
                 <li><a href="combat.html">Combat</a></li>
             </ul>
         </nav>
@@ -33,16 +34,20 @@
                 <label for="system">El mateix que el sistema</label>
             </div>
         </div>
-    </nav>
+    </div>
     <div id="content">
 
-        <div id="pokedex-deck"></div>
-
-        <div id="pokedex-pokemon-details" class="hidden">
-            <div id="pokedex-pokemon-detailed-info">
-
-
+        <div id="pokedex-deck-container">
+            <div id="pokedex-filter-container">
+                <label for="pokedex-filter">Filter: </label>
+                <input id="pokedex-filter" type="search" name="pokedex-filter"/>
+                <button id="pokedex-clear-filter">Clear</button>
             </div>
+            <div id="pokedex-deck"></div>
+        </div>
+
+        <div id="pokedex-pokemon-details-container" class="hidden">
+            <div id="pokedex-pokemon-details"></div>
             <a id="pokedex-back-from-details" href="javascript:history.back()">Tornar enrere</a>
         </div>
         
