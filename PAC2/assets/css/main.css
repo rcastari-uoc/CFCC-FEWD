@@ -1,3 +1,5 @@
+/** Light theme colors */
+
 :root {
   --background-color: #EEE;
   --color: #111;
@@ -10,6 +12,8 @@
   --navbar-selectedTab-background: #8D8;
 }
 
+/** Dark theme colors */
+
 .theme-dark {
   --background-color: #111;
   --color: #EEE;
@@ -21,6 +25,8 @@
   --navbar-hover-background: #272;
   --navbar-selectedTab-background: #494;
 }
+
+/** Basic Shared Layout */
 
 body {
   background-color: var(--background-color);
@@ -79,9 +85,19 @@ body {
 #pokedex-deck-container, #pokedex-pokemon-details-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 1em;
 }
+
+/** Index Page Specific Styles*/
+
+/** Hiddeable blocks */
+
+#pokedex-deck-container.hidden, #pokedex-pokemon-details-container.hidden, .poke-card.hidden {
+  display: none;
+}
+
+/** Pokemon Filter Styles */
 
 #pokedex-filter-container {
   display: flex;
@@ -94,43 +110,50 @@ body {
   width: 20em;
 }
 
+/** Pokemon deck */
+
 #pokedex-deck {
   display: grid;
+  justify-content: space-evenly;
   grid-template-columns: repeat(5, 12em);
-  grid-template-rows: 16.5em 16.5em;
-  grid-gap: 2em 4em;  
+  grid-gap: 2em;
 }
 
-#pokedex-deck-container.hidden, #pokedex-pokemon-details-container.hidden, .poke-card.hidden {
-  display: none;
+#pokedex-pokemon-details {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 24em;
 }
 
 div.poke-card, div.poke-card-details {
-  
+  width: 100%;
   display: grid;
-  place-items: center;
-
+  justify-content: stretch;
+  align-content: stretch;
+  text-align: center;
   background-color: var(--card-background-color);
   color: var(--card-color);
   border: 0.5em solid var(--card-border-color);
   border-radius: 1em;
-
 }
 
 div.poke-card { 
-  grid-template-columns: 5.5em 5.5em;
-  grid-template-rows: 2em 9.5em 0.5em 2em 1em;
+  grid-template-columns: 6em 6em;
+  grid-template-rows: 3em 12em 1.5em 1.5em 1.5em;
 }
 
 div.poke-card-details {
-  grid-template-columns: repeat(4, 5.5em);
-  grid-template-rows: 2em 9.5em 0.5em 1.5em 1.5em 4em;
+  justify-content: center;
+  grid-template-columns: repeat(4, 6em);
+  grid-template-rows: 3em 12em 1.5em 1.5em 1.5em 3em;
 }
 
 .poke-card .poke-name, .poke-card-details .poke-name {
-  grid-row: 1;
   font-weight: bold;
   font-size: large;
+  background-color: var(--card-label-background);
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
 }
 
 .poke-card .poke-name {
@@ -143,6 +166,8 @@ div.poke-card-details {
 
 .poke-card .poke-front-image, .poke-card-details .poke-front-image, .poke-card-details .poke-back-image {
   grid-row: 2;
+  justify-self: stretch;
+  align-self: stretch;
 }
 
 .poke-card .poke-front-image, .poke-card-details .poke-front-image {
@@ -164,15 +189,14 @@ div.poke-card-details {
 }
 
 .poke-card .poke-more-details {
-  grid-row: 5;
   grid-column: 1 / span 2;
 }
 
 .poke-card-details .poke-types-label {
   grid-row: 5;
   grid-column: 1 / span 4;
-  width: 98%;
-  padding: 1%;
+  justify-self: stretch;
+  padding: 0.25em 0em;
   text-align: center;
   font-size: medium;
   font-weight: bold;
@@ -201,4 +225,49 @@ div.poke-card-details {
 
 #pokedex-html-templates {
   display: none;
+}
+
+#pokedex-deck.poke-combat-deck {
+  grid-template-rows: 18.5em;
+}
+
+.poke-combat-card div.poke-card{
+  grid-template-columns: 6em 6em;
+  grid-template-rows: 3em 12em 1.5em 1.5em;
+}
+
+.poke-combat-card {
+  background-color: transparent;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.poke-combat-card-content {
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  transform-origin: 6.5em;
+}
+
+.poke-combat-card:hover .poke-combat-card-content {
+  transform: rotateY(180deg);
+}
+
+.poke-combat-card .poke-card, .poke-combat-card .poke-card-back {
+  position: absolute;
+  --webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.poke-combat-card .poke-card {
+  transform: rotateY(180deg);
+}
+
+.poke-combat-card .poke-card-back {
+  width: 100%;
+  height: 18em;
+  border: 0.5em solid var(--card-border-color);
+  border-radius: 1em;
+  background: repeating-linear-gradient(-45deg, var(--card-background-color), var(--card-background-color) 1em, var(--card-label-background) 1em, var(--card-label-background) 2em);
 }

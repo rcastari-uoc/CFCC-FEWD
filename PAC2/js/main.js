@@ -1,3 +1,5 @@
+const DECK_MAX_COUNT = 10;
+
 class PokeCard{
     constructor(pokemon){
         this.id = pokemon.id;
@@ -9,9 +11,9 @@ class PokeCard{
         this.types = pokemon.types;
     }
 
-    toHTMLBasicView(){
-
-        let cardTemplate = document.querySelector("#pokedex-html-templates>div.poke-card");
+    toHTMLMinimalView(templateRef){
+        
+        let cardTemplate = document.querySelector(templateRef);
 
         let cardElement = cardTemplate.cloneNode(true);
 
@@ -22,8 +24,14 @@ class PokeCard{
         cardElement.querySelector(".poke-front-image").alt = this.frontImage;
         cardElement.querySelector(".poke-attack").appendChild(document.createTextNode(this.attack));
         cardElement.querySelector(".poke-defense").appendChild(document.createTextNode(this.defense));
-        cardElement.querySelector(".poke-more-details").href = "index.html?pokeID="+this.id;
 
+        return cardElement;
+    }
+
+    toHTMLBasicView(){
+
+        let cardElement = this.toHTMLMinimalView("#pokedex-html-templates>div.poke-card");
+        cardElement.querySelector(".poke-more-details").href = "index.html?pokeID="+this.id;
         return cardElement;
 
     }
@@ -56,17 +64,21 @@ class PokeCard{
 
     }
 
+    toHTMLCombatView(){
+        return this.toHTMLMinimalView("#pokedex-html-templates>div.poke-combat-card");
+    }
+
 }
 
-function loadCards(callbackFn){
+function loadCards(globalVarToUse, sessionStorageKey = "pokeDeck", callbackFn){
 
-    let stringifiedCardList = sessionStorage.getItem("pokeDeck");
+    let stringifiedCardList = sessionStorage.getItem(sessionStorageKey);
 
     if(stringifiedCardList){
 
         let rawCardList = JSON.parse(stringifiedCardList);
 
-        cardList = rawCardList.map(object => {
+        let cardList = rawCardList.map(object => {
 
             let o = object[1];
 
@@ -81,7 +93,7 @@ function loadCards(callbackFn){
         })
 
         cardList.forEach(card => {
-            pokeDeck.set(card.id, card);
+            globalVarToUse.set(card.id, card);
         });
 
         if(callbackFn){
@@ -89,12 +101,12 @@ function loadCards(callbackFn){
         }
 
     }else{
-        fetchCards(callbackFn);
+        fetchCards(globalVarToUse, sessionStorageKey, callbackFn);
     }
 
 }
 
-function fetchCards(callbackFn){
+function fetchCards(globalVarToUse, sessionStorageKey = "pokeDeck", callbackFn){
 
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=1')
         .then(response => response.json()).then(data => {
@@ -103,7 +115,7 @@ function fetchCards(callbackFn){
 
             let pokemonNumberList = [];
 
-            for(let n = 0; n < POKEDECK_MAX_COUNT; n++){
+            for(let n = 0; n < DECK_MAX_COUNT; n++){
                 
                 let candidateNumber = Math.floor(maxPokemonNumber * Math.random());
 
@@ -125,14 +137,14 @@ function fetchCards(callbackFn){
                         let pokeURL = data.results[0].url;
 
                         fetch(pokeURL).then(response => response.json()).then(data=>{
-                        
-                            pokeDeck.set(data.id, new PokeCard(data));
 
-                            if(pokeDeck.size == POKEDECK_MAX_COUNT){
+                            globalVarToUse.set(data.id, new PokeCard(data));
+
+                            if(globalVarToUse.size == DECK_MAX_COUNT){
 
                                 // Save the Deck in the Session Storage object
 
-                                sessionStorage.setItem("pokeDeck", JSON.stringify(Array.from(pokeDeck.entries())));
+                                sessionStorage.setItem(sessionStorageKey, JSON.stringify(Array.from(globalVarToUse.entries())));
 
                                 if(callbackFn){
                                     callbackFn();

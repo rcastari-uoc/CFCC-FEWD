@@ -1,15 +1,14 @@
-const POKEDECK_MAX_COUNT = 10;
-var pokeCombatDeck = new Map();
+var combatDeck = new Map();
 
 function loadTheRestOfTheCombatPage(){
 
     let deckDiv = document.getElementById("pokedex-deck");
 
-    let cardList = Array.from(pokeDeck.values());
+    let cardList = Array.from(combatDeck.values());
 
     cardList.forEach(card => {
-        let cardHTMLBasicView = card.toHTMLBasicView();
-        deckDiv.appendChild(cardHTMLBasicView);
+        let cardHTMLCombatView = card.toHTMLCombatView();
+        deckDiv.appendChild(cardHTMLCombatView);
     })
 
 }
@@ -22,7 +21,7 @@ function loadTheRestOfTheCombatPage(){
 
 function pokedexCombatPageOnLoadHandler(){
 
-    loadCards(loadTheRestOfTheCombatPage);
+    loadCards(combatDeck, "combatDeck", loadTheRestOfTheCombatPage);
 }
 
 /**

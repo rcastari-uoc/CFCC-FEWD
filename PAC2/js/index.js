@@ -1,39 +1,4 @@
-const POKEDECK_MAX_COUNT = 10;
 var pokeDeck = new Map();
-
-function loadCards(callbackFn){
-
-    let stringifiedCardList = sessionStorage.getItem("pokeDeck");
-
-    if(stringifiedCardList){
-
-        let rawCardList = JSON.parse(stringifiedCardList);
-
-        cardList = rawCardList.map(object => {
-
-            let o = object[1];
-
-            return new PokeCard({
-                id: o.id,
-                name: o.name,
-                sprites: { front_default: o.frontImage, back_default: o.backImage },
-                stats: [ null, {base_stat: o.attack}, {base_stat: o.defense} ],
-                types: o.types
-            });
-
-        })
-
-        cardList.forEach(card => {
-            pokeDeck.set(card.id, card);
-        });
-
-        loadTheRestOfTheIndexPage();
-
-    }else{
-        fetchCards(callbackFn);
-    }
-
-}
 
 function loadTheRestOfTheIndexPage(){
 
@@ -75,13 +40,12 @@ function clearFilterEventHandler(event){
  * Main script
  * 
  */
-
  function pokedexIndexPageOnLoadHandler(){
 
     let params = new URLSearchParams(document.location.search);
     let pokeIDParam = params.get("pokeID");
     if (pokeIDParam) {
-        loadCards();
+        loadCards(pokeDeck, "pokeDeck");
         let pokeCard = pokeDeck.get(parseInt(pokeIDParam)).toHTMLAdvancedView();
         let deckContainerDiv = document.getElementById("pokedex-deck-container");
         let detailsContainerDiv = document.getElementById("pokedex-pokemon-details-container");
@@ -91,7 +55,7 @@ function clearFilterEventHandler(event){
         deckContainerDiv.classList.add("hidden");
         detailsContainerDiv.classList.remove("hidden");
     }else{
-        loadCards(loadTheRestOfTheIndexPage);
+        loadCards(pokeDeck, "pokeDeck", loadTheRestOfTheIndexPage);
         document.getElementById("pokedex-filter").addEventListener("input", filterInputEventHandler, false);
         document.getElementById("pokedex-clear-filter").addEventListener("click", clearFilterEventHandler, false);
     }
@@ -101,5 +65,4 @@ function clearFilterEventHandler(event){
 /**
  * Attach this script into the loaded page
  */
-
 window.addEventListener("load", pokedexIndexPageOnLoadHandler, false);
