@@ -11,7 +11,7 @@
     <script src="js/combat.js" defer></script>
 </head>
 <body>
-    <header></header>
+    <header><h1>Curs Front End Web developer CFCC - UOC</h1><h2>PAC2 - Pokedex</h1><h3>Alumne: Rafel Castaño Ribes</h3></header>
     <div id="menuBar">
         <nav id="navBar">
             <ul id="pageSelector">
@@ -35,11 +35,19 @@
             </div>
         </div>
     </div>
+
     <div id="content">
+        <div id="pokedex-combat-instructions">Selecciona dues cartes. La primera serà el Pokemon atacant i la segona el defensor. El resultat del combat es mostrarà en la caixa just a sota d'aquestes instrucions. Per iniciar un nou combat fes clic al botó reinicia un cop finalitzat el combat actual.</div>
+        <div id="pokedex-combat-controls">
+            <div id="pokedex-combat-result-label">Resultat del combat: </div>
+            <div id="pokedex-combat-result"></div>
+            <button id="pokedex-combat-reset-button" disabled>Reinicia</button>
+        </div>
         <div id="pokedex-deck-container">
-            <div id="pokedex-deck" class="poke-combat-deck"></div>
+            <div id="pokedex-deck" class="poke-combat-deck loading"></div>
         </div>
     </div>
+    
     <div id="pokedex-html-templates" class="hidden">
 
         <div class="poke-combat-card">
