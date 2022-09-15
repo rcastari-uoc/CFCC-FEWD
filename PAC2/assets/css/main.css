@@ -106,6 +106,7 @@ header h1, header h2, header h3 {
 }
 
 #pokedex-deck-container, #pokedex-pokemon-details-container {
+  padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -224,6 +225,15 @@ div.poke-card-details {
 
 .poke-card .poke-more-details {
   grid-column: 1 / span 2;
+  
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--card-color);
+  background-color: var(--card-label-background);
+  border-top: 3px solid #CCC;
+  border-right: 3px solid #333;
+  border-bottom: 3px solid #333;
+  border-left: 3px solid #CCC;
 }
 
 .poke-card-details .poke-types-label {
@@ -255,6 +265,22 @@ div.poke-card-details {
 
 #pokedex-pokemon-details {
   display: grid;
+}
+
+#pokedex-back-from-details {
+  display: flex;
+  justify-content: center;
+}
+
+#pokedex-back-from-details > a {
+  color: var(--color);
+  background-color: var(--background-color);
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-top: 3px solid #CCC;
+  border-right: 3px solid #333;
+  border-bottom: 3px solid #333;
+  border-left: 3px solid #CCC;
 }
 
 /** Combat Page Specific Styles */
