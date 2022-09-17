@@ -353,6 +353,6 @@ div.poke-card-details {
 }
 
 .poke-combat-card:hover .poke-card-back {
-  background: repeating-linear-gradient(-45deg, var(--card-label-background), var(--card-label-background) 1em, var(--card-color) 1em, var(--card-color) 2em);
+  background: repeating-linear-gradient(-45deg, var(--card-label-background), var(--card-label-background) 1em, var(--card-color) 1em, var(--card-color) 2em) ;
 }
 
