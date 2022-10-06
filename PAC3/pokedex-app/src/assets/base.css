@@ -1,0 +1,64 @@
+/** Light theme colors */
+
+:root {
+  --background-color: #EEE;
+  --color: #111;
+  --card-background-color: #FCC;
+  --card-color: #700;
+  --card-border-color: #A00;
+  --card-label-background: #F99;
+  --header-background: #CCF;
+  --header-color: #22C;
+  --menu-background: #AFA;
+  --navbar-hover-background: #9E9;
+  --navbar-selectedTab-background: #8D8;
+  --combat-instructions-background: #BEB;
+  --combat-instructions-color: #022;
+  --combat-controls-background: #DFF;
+  --combat-controls-color: #022;
+}
+
+/** Dark theme colors */
+
+.theme-dark {
+  --background-color: #111;
+  --color: #EEE;
+  --card-background-color: #700;
+  --card-color: #FCC;
+  --card-border-color: #A00;
+  --card-label-background: #A44;
+  --header-background: #229;
+  --header-color: #CCF;
+  --menu-background: #050;
+  --navbar-hover-background: #272;
+  --navbar-selectedTab-background: #494;
+  --combat-instructions-background: #055;
+  --combat-instructions-color: #CFF;
+  --combat-controls-background: #133;
+  --combat-controls-color: #DFF;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color);
+  background: var(--background-color);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+

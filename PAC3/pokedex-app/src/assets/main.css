@@ -1,0 +1,28 @@
+@import "./base.css";
+
+#app {
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color);
+  padding: 0.5em;
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+a.button {
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-top: 3px solid #CCC;
+  border-right: 3px solid #333;
+  border-bottom: 3px solid #333;
+  border-left: 3px solid #CCC;
+}
