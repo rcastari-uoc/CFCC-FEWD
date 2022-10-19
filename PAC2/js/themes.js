@@ -1,3 +1,4 @@
+// comentari: molt bona feina amb la selecció de theme, especialment el treball amb el sistema de mediaqueries natives segons sistema operatiu
 function loadTheme(){
     
     let previousStoredTheme = localStorage.getItem("pokedex-theme-value");
