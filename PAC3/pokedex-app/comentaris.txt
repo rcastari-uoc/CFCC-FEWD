@@ -1,0 +1,17 @@
+a tenir en compte:
+enlloc d'obtenir primer tots els pokemons i després filtrar-los, potser es podrien crear uns quants nombres
+aleatories i després obtenir els pokemons d'quests en concret
+
+punts forts:
+bon detall mostrar el nom i el curs a la pàgina principal, dóna context
+ben pensat crear un component per al selector del tema clar/fosc, sobretot l'opció de triar el color del sistema
+bon ús d'expresions booleanes !, &&
+molt bé donar l'opció de poder tornar a la pàgina principal desde la vista detall
+bon control de tots els casos (if / else if / else), enlloc de només if / else
+opció de reset del combat
+ben vist crear un component filtre
+
+comentaris/alternatives:
+bon ús de components. Com a alternativa potser es podria plantejar utilitzar directament els components CombatCard
+dins de la vista de lluia enlloc de tenir un component intermig que pinti les cartes i gestioni els emits (es podrien fer directament
+de la carta a la vista).
